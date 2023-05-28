@@ -13,6 +13,12 @@
 		83251D9E2A22692300F956ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83251D9C2A22692300F956ED /* Main.storyboard */; };
 		83251DA02A22692400F956ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83251D9F2A22692400F956ED /* Assets.xcassets */; };
 		83251DA32A22692400F956ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83251DA12A22692400F956ED /* LaunchScreen.storyboard */; };
+		83251DAF2A23952800F956ED /* bus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DA92A23952800F956ED /* bus.usdz */; };
+		83251DB02A23952800F956ED /* car.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAA2A23952800F956ED /* car.usdz */; };
+		83251DB12A23952800F956ED /* traffic_light.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAB2A23952800F956ED /* traffic_light.usdz */; };
+		83251DB22A23952800F956ED /* bridge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAC2A23952800F956ED /* bridge.usdz */; };
+		83251DB32A23952800F956ED /* eiffel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAD2A23952800F956ED /* eiffel.usdz */; };
+		83251DB42A23952800F956ED /* tree.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAE2A23952800F956ED /* tree.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +29,12 @@
 		83251D9D2A22692300F956ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83251D9F2A22692400F956ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83251DA22A22692400F956ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83251DA92A23952800F956ED /* bus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = bus.usdz; sourceTree = "<group>"; };
+		83251DAA2A23952800F956ED /* car.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = car.usdz; sourceTree = "<group>"; };
+		83251DAB2A23952800F956ED /* traffic_light.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = traffic_light.usdz; sourceTree = "<group>"; };
+		83251DAC2A23952800F956ED /* bridge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = bridge.usdz; sourceTree = "<group>"; };
+		83251DAD2A23952800F956ED /* eiffel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = eiffel.usdz; sourceTree = "<group>"; };
+		83251DAE2A23952800F956ED /* tree.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = tree.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +67,12 @@
 		83251D952A22692300F956ED /* Hand Drawing Recognition AR */ = {
 			isa = PBXGroup;
 			children = (
+				83251DAC2A23952800F956ED /* bridge.usdz */,
+				83251DA92A23952800F956ED /* bus.usdz */,
+				83251DAA2A23952800F956ED /* car.usdz */,
+				83251DAD2A23952800F956ED /* eiffel.usdz */,
+				83251DAB2A23952800F956ED /* traffic_light.usdz */,
+				83251DAE2A23952800F956ED /* tree.usdz */,
 				83251D962A22692300F956ED /* AppDelegate.swift */,
 				83251D982A22692300F956ED /* art.scnassets */,
 				83251D9A2A22692300F956ED /* ViewController.swift */,
@@ -124,9 +142,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				83251D992A22692300F956ED /* art.scnassets in Resources */,
+				83251DB42A23952800F956ED /* tree.usdz in Resources */,
 				83251DA32A22692400F956ED /* LaunchScreen.storyboard in Resources */,
+				83251DB02A23952800F956ED /* car.usdz in Resources */,
+				83251DB12A23952800F956ED /* traffic_light.usdz in Resources */,
+				83251DB22A23952800F956ED /* bridge.usdz in Resources */,
 				83251DA02A22692400F956ED /* Assets.xcassets in Resources */,
+				83251DB32A23952800F956ED /* eiffel.usdz in Resources */,
 				83251D9E2A22692300F956ED /* Main.storyboard in Resources */,
+				83251DAF2A23952800F956ED /* bus.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

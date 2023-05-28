@@ -11,7 +11,13 @@ import ARKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var debugText: UILabel!
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet var sceneView: ARSCNView!
+    
+    @IBAction func resetButtonAction() {
+        print("Reset")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
