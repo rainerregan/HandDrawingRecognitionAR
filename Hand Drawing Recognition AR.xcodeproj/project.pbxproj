@@ -19,6 +19,7 @@
 		83251DB22A23952800F956ED /* bridge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAC2A23952800F956ED /* bridge.usdz */; };
 		83251DB32A23952800F956ED /* eiffel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAD2A23952800F956ED /* eiffel.usdz */; };
 		83251DB42A23952800F956ED /* tree.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 83251DAE2A23952800F956ED /* tree.usdz */; };
+		837EE1C82A26F7EC003A3D12 /* HandDrawingModel_v4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 837EE1C72A26F7EC003A3D12 /* HandDrawingModel_v4.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		83251DAC2A23952800F956ED /* bridge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = bridge.usdz; sourceTree = "<group>"; };
 		83251DAD2A23952800F956ED /* eiffel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = eiffel.usdz; sourceTree = "<group>"; };
 		83251DAE2A23952800F956ED /* tree.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = tree.usdz; sourceTree = "<group>"; };
+		837EE1C72A26F7EC003A3D12 /* HandDrawingModel_v4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HandDrawingModel_v4.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		83251D952A22692300F956ED /* Hand Drawing Recognition AR */ = {
 			isa = PBXGroup;
 			children = (
+				837EE1C62A26F794003A3D12 /* Model */,
 				83251DAC2A23952800F956ED /* bridge.usdz */,
 				83251DA92A23952800F956ED /* bus.usdz */,
 				83251DAA2A23952800F956ED /* car.usdz */,
@@ -81,6 +84,14 @@
 				83251DA12A22692400F956ED /* LaunchScreen.storyboard */,
 			);
 			path = "Hand Drawing Recognition AR";
+			sourceTree = "<group>";
+		};
+		837EE1C62A26F794003A3D12 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				837EE1C72A26F7EC003A3D12 /* HandDrawingModel_v4.mlmodel */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			files = (
 				83251D9B2A22692300F956ED /* ViewController.swift in Sources */,
 				83251D972A22692300F956ED /* AppDelegate.swift in Sources */,
+				837EE1C82A26F7EC003A3D12 /* HandDrawingModel_v4.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

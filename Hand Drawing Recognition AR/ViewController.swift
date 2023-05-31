@@ -8,6 +8,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import Vision
 
 class ViewController: UIViewController {
 
@@ -17,6 +18,23 @@ class ViewController: UIViewController {
     
     @IBAction func resetButtonAction() {
         print("Reset")
+    }
+    
+    /// The ML model to be used for recognition of arbitrary objects.
+    private var _handDrawingModel: HandDrawingModel_v4!
+    private var handDrawingModel: HandDrawingModel_v4! {
+        get {
+            if let model = _handDrawingModel { return model }
+            _handDrawingModel = {
+                do {
+                    let configuration = MLModelConfiguration()
+                    return try HandDrawingModel_v4(configuration: configuration)
+                } catch {
+                    fatalError("Couldn't create HandDrawingModel due to: \(error)")
+                }
+            }()
+            return _handDrawingModel
+        }
     }
     
     override func viewDidLoad() {
@@ -45,11 +63,22 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(tapGesture) // Add the gesture recognizer to the view
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // Specify the supported orientations (in this case, only portrait)
+        return .portrait
+    }
+    
+    override var shouldAutorotate: Bool {
+        // Disable autorotation
+        return false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = [.horizontal]
 
         // Run the view's session
         sceneView.session.run(configuration)
