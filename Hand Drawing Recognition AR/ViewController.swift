@@ -9,6 +9,7 @@ import UIKit
 import SceneKit
 import ARKit
 import Vision
+import SceneKit.ModelIO
 
 class ViewController: UIViewController {
 
@@ -121,13 +122,27 @@ class ViewController: UIViewController {
                 let worldCoord : SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
                 
                 /// Load 3D Model into the scene as SCNNode and adding into the scene
-//                guard let node : SCNNode = loadNodeBasedOnPrediction(identifierString) else {return}
-//                sceneView.scene.rootNode.addChildNode(node)
-//                node.position = worldCoord
+                guard let node : SCNNode = loadNodeBasedOnPrediction(identifierString) else {return}
+                sceneView.scene.rootNode.addChildNode(node)
+                node.position = worldCoord
             }
         }
 
         
+    }
+    
+    func loadNodeBasedOnPrediction(_ text: String) -> SCNNode? {
+        guard let urlPath = Bundle.main.url(forResource: text.trimmingCharacters(in: .whitespacesAndNewlines), withExtension: "usdz") else {
+            return nil
+        }
+        let mdlAsset = MDLAsset(url: urlPath)
+        mdlAsset.loadTextures()
+        
+        let asset = mdlAsset.object(at: 0) // extract first object
+        let assetNode = SCNNode(mdlObject: asset)
+        assetNode.scale = SCNVector3(0.001, 0.001, 0.001)
+        
+        return assetNode
     }
     
     // MARK: - CoreML Vision Handling
