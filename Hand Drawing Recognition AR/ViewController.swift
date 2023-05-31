@@ -51,6 +51,7 @@ class ViewController: UIViewController {
         
         // Set the view's delegate
         sceneView.delegate = self
+        sceneView.session.delegate = self
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
@@ -67,6 +68,9 @@ class ViewController: UIViewController {
             action: #selector(self.handleTap(gestureRecognizer:))
         )
         view.addGestureRecognizer(tapGesture) // Add the gesture recognizer to the view
+        
+        // Start the scanning session
+        self.restartSession()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -199,9 +203,30 @@ class ViewController: UIViewController {
         self.debugText.text = "I'm \(self.confidence * 100)% sure this is a/an \(self.identifierString)"
     }
 
+    
+    // MARK: - Restart Session and Rerun AR
+    private func restartSession() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = [.horizontal, .vertical]
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
 }
 
 // MARK: - ARSCNViewDelegate
 extension ViewController : ARSCNViewDelegate {
     func session(_ session: ARSession, didFailWithError error: Error) {}
+}
+
+// MARK: - ARSessionDelegate
+extension ViewController: ARSessionDelegate {
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        print("OK")
+        guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
+            return
+        }
+        
+        // Retain the image buffer for Vision processing.
+        self.currentBuffer = frame.capturedImage
+        classifyCurrentImage();
+    }
 }
