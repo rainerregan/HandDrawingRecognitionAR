@@ -16,6 +16,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet var sceneView: ARSCNView!
     
+    /// A  variable containing the latest CoreML prediction
+    private var identifierString = ""
+    private var confidence: VNConfidence = 0.0
+    private let dispatchQueueML = DispatchQueue(label: "com.exacode.dispatchqueueml") // A Serial Queue
+    private var currentBuffer : CVImageBuffer?
+    
     @IBAction func resetButtonAction() {
         print("Reset")
     }
@@ -118,6 +124,79 @@ class ViewController: UIViewController {
         }
 
         
+    }
+    
+    // MARK: - CoreML Vision Handling
+    private lazy var classificationRequest: VNCoreMLRequest = {
+        do {
+            // Instantiate the model from its generated Swift class.
+            let model = try VNCoreMLModel(for: handDrawingModel.model)
+            let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
+                self?.classificationCompleteHandler(request: request, error: error)
+            })
+            
+            // Crop input images to square area at center, matching the way the ML model was trained.
+            request.imageCropAndScaleOption = .centerCrop
+            
+            // Use CPU for Vision processing to ensure that there are adequate GPU resources for rendering.
+            request.usesCPUOnly = true
+            
+            return request
+        } catch {
+            fatalError("Failed to load Vision ML model: \(error)")
+        }
+    }()
+    
+    func classifyCurrentImage() {
+        let orientation = CGImagePropertyOrientation(UIDevice.current.orientation)
+        
+        let imageRequestHandler = VNImageRequestHandler(
+            cvPixelBuffer: currentBuffer!,
+            orientation: orientation
+        )
+        
+        // Run Image Request
+        dispatchQueueML.async {
+            do {
+                // Release the pixel buffer when done, allowing the next buffer to be processed.
+                defer { self.currentBuffer = nil }
+                try imageRequestHandler.perform([self.classificationRequest])
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func classificationCompleteHandler(request: VNRequest, error: Error?) {
+        guard let results = request.results else {
+            print("Unable to classify image.\n\(error!.localizedDescription)")
+            return
+        }
+        
+        // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+        let classifications = results as! [VNClassificationObservation]
+        
+        // Show a label for the highest-confidence result (but only above a minimum confidence threshold).
+        if let bestResult = classifications.first(where: { result in result.confidence > 0.5 }),
+            let label = bestResult.identifier.split(separator: ",").first {
+            identifierString = String(label)
+            confidence = bestResult.confidence
+        } else {
+            identifierString = ""
+            confidence = 0
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.displayClassifiedResult()
+        }
+    }
+    
+    func displayClassifiedResult() {
+        // Print the clasification
+        print("Clasification: \(self.identifierString)", "Confidence: \(self.confidence)")
+        print("---------")
+        
+        self.debugText.text = "I'm \(self.confidence * 100)% sure this is a/an \(self.identifierString)"
     }
 
 }
