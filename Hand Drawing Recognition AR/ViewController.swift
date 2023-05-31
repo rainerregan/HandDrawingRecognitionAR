@@ -25,6 +25,10 @@ class ViewController: UIViewController {
     
     @IBAction func resetButtonAction() {
         print("Reset")
+        
+//        guard let sceneView = sceneView else {return}
+//        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+//        node.removeFromParentNode() }
     }
     
     /// The ML model to be used for recognition of arbitrary objects.
@@ -235,7 +239,6 @@ extension ViewController : ARSCNViewDelegate {
 // MARK: - ARSessionDelegate
 extension ViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        print("OK")
         guard currentBuffer == nil, case .normal = frame.camera.trackingState else {
             return
         }
